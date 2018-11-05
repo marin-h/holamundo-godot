@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
 [sub_resource type="GDScript" id=1]
+
+script/source = "extends Node2D
+
+func _ready():
+	get_node(\"Label\").set_uppercase(true)
+"
+
+[sub_resource type="GDScript" id=2]
 
 script/source = "extends Label
 
@@ -22,6 +30,8 @@ func _on_Button_pressed():
 
 [node name="Node2D" type="Node2D"]
 
+script/script = SubResource( 1 )
+
 [node name="Label" type="Label" parent="."]
 
 visibility/visible = false
@@ -37,7 +47,7 @@ text = "Hola mundo!"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = SubResource( 1 )
+script/script = SubResource( 2 )
 
 [node name="Button" type="Button" parent="."]
 
