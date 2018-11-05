@@ -15,7 +15,10 @@ func _ready():
 
 
 func _on_Button_pressed():
-	show()"
+	if(is_visible()):
+		hide()
+	else:
+		show()"
 
 [node name="Node2D" type="Node2D"]
 
