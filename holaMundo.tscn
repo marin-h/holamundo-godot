@@ -1,0 +1,20 @@
+[gd_scene format=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 503.0
+margin/top = 296.0
+margin/right = 543.0
+margin/bottom = 310.0
+text = "Hola mundo!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+
