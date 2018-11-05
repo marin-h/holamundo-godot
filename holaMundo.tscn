@@ -5,6 +5,7 @@
 script/source = "extends Node2D
 
 func _ready():
+	get_node(\"Label\").hide()
 	get_node(\"Label\").set_uppercase(true)
 "
 
@@ -12,21 +13,18 @@ func _ready():
 
 script/source = "extends Label
 
-# class member variables go here, for example:
-# var a = 2
-# var b = \"textvar\"
+var global 
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
+	global = get_node(\"/root/global\")
 
 func _on_Button_pressed():
 	if(is_visible()):
 		hide()
 	else:
-		show()"
+		show()
+		global.sumarUno()
+		get_node(\"Counter\").set_text(str(global.cuenta))"
 
 [node name="Node2D" type="Node2D"]
 
@@ -34,20 +32,33 @@ script/script = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
 
-visibility/visible = false
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 503.0
-margin/top = 296.0
-margin/right = 543.0
-margin/bottom = 310.0
+margin/left = 490.0
+margin/top = 300.0
+margin/right = 572.0
+margin/bottom = 314.0
 text = "Hola mundo!"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 script/script = SubResource( 2 )
+
+[node name="Counter" type="Label" parent="Label"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 105.0
+margin/top = 1.0
+margin/right = 145.0
+margin/bottom = 19.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="Button" type="Button" parent="."]
 
