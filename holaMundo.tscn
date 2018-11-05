@@ -8,15 +8,25 @@ func _ready():
 	get_node(\"Label\").hide()
 	get_node(\"Label\").set_uppercase(true)
 	get_node(\"Timer\").start()
-	
+
 func _on_Timer_timeout():
 	get_node(\"Button\").hide()
 	get_node(\"Label\").set_text(\"GAME OVER\")
-	get_node(\"Label\").show()"
+	get_node(\"Label\").show()
+
+func _on_Label_gane():
+	get_node(\"Timer\").queue_free()
+	get_node(\"Button\").hide()
+	get_node(\"Label\").show()
+	get_node(\"Label\").set_text(\"Ganaste!\")
+
+"
 
 [sub_resource type="GDScript" id=2]
 
 script/source = "extends Label
+
+signal gane
 
 var global 
 
@@ -29,7 +39,10 @@ func _on_Button_pressed():
 	else:
 		show()
 		global.sumarUno()
-		get_node(\"Counter\").set_text(str(global.cuenta))"
+		get_node(\"Counter\").set_text(str(global.cuenta))
+		if(global.cuenta == 6):
+			emit_signal(\"gane\")
+"
 
 [node name="Node2D" type="Node2D"]
 
@@ -87,6 +100,8 @@ process_mode = 1
 wait_time = 3.0
 one_shot = false
 autostart = false
+
+[connection signal="gane" from="Label" to="." method="_on_Label_gane"]
 
 [connection signal="pressed" from="Button" to="Label" method="_on_Button_pressed"]
 
