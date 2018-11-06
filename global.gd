@@ -14,8 +14,8 @@ func _ready():
 	current_scene = root.get_child(root.get_child_count() - 1)
 	connect("gane", current_scene, "show_ganar", [], CONNECT_ONESHOT)
 	connect("perdi", current_scene, "show_perder", [], CONNECT_ONESHOT)
-	get_node("Timer").start()
 	get_node("Timer").connect("timeout", current_scene, "decrementar_reloj", [], CONNECT_PERSIST)
+	get_node("Timer").start()
 	
 func sumarUno():
 	cuenta = cuenta + 1
