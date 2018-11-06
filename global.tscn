@@ -14,5 +14,15 @@ margin/right = 40.0
 margin/bottom = 40.0
 script/script = ExtResource( 1 )
 cuenta = 0
+tiempo = 5
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 

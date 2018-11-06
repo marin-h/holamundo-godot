@@ -7,32 +7,30 @@ script/source = "extends Node2D
 func _ready():
 	get_node(\"Label\").hide()
 	get_node(\"Label\").set_uppercase(true)
-	get_node(\"Timer\").start()
 
-func _on_Timer_timeout():
+func show_perder():
 	get_node(\"Button\").hide()
 	get_node(\"Label\").set_text(\"GAME OVER\")
 	get_node(\"Label\").show()
 
-func _on_Label_gane():
-	get_node(\"Timer\").queue_free()
+func show_ganar():
 	get_node(\"Button\").hide()
 	get_node(\"Label\").show()
 	get_node(\"Label\").set_text(\"Ganaste!\")
-
-"
+	
+func decrementar_reloj():
+	get_node(\"reloj/segundos\").set_text(str(global.tiempo))
+	"
 
 [sub_resource type="GDScript" id=2]
 
 script/source = "extends Label
 
-signal gane
-
 var global 
 
 func _ready():
 	global = get_node(\"/root/global\")
-
+	 
 func _on_Button_pressed():
 	if(is_visible()):
 		hide()
@@ -40,8 +38,6 @@ func _on_Button_pressed():
 		show()
 		global.sumarUno()
 		get_node(\"Counter\").set_text(str(global.cuenta))
-		if(global.cuenta == 6):
-			emit_signal(\"gane\")
 "
 
 [node name="Node2D" type="Node2D"]
@@ -78,6 +74,36 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="reloj" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 472.0
+margin/top = 265.0
+margin/right = 581.0
+margin/bottom = 279.0
+text = "Tiempo restante:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="segundos" type="Label" parent="reloj"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 117.0
+margin/top = -1.0
+margin/right = 157.0
+margin/bottom = 13.0
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="Button" type="Button" parent="."]
 
 focus/ignore_mouse = false
@@ -94,17 +120,6 @@ shortcut = null
 text = "Apretame!"
 flat = false
 
-[node name="Timer" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 3.0
-one_shot = false
-autostart = false
-
-[connection signal="gane" from="Label" to="." method="_on_Label_gane"]
-
 [connection signal="pressed" from="Button" to="Label" method="_on_Button_pressed"]
-
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 
